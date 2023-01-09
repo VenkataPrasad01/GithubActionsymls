@@ -90,51 +90,28 @@ jobs:
         needs: test
         runs-on: ubuntu-latest
         steps:  
-            - name: ServiceNow DevOps Register Artifact
-            # You may pin to the exact commit or the version.
-              uses: ServiceNow/servicenow-devops-register-artifact@main
-              with:
-                  # Devops Integration User Name
-                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-                  # Devops Integration User Password
-                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-                  # ServiceNow Instance URL
-                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
-                  # Orchestration Tool Id
-                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-                  # Display Name of the Job
-                  job-name: 'Integration Tests'
-                  # Github Context
-                  context-github: ${{ toJSON(github) }}
-                  # List of Artifacts to be registered
-                  artifacts: '[{"name": "app-devops.jar2","version": "1.${{ github.run_number }}","semanticVersion": "1.${{ github.run_number }}.0","repositoryName": "${{ github.repository }}"}]'
-            - name: ServiceNow DevOps Register Package
-            # You may pin to the exact commit or the version.
-              uses: ServiceNow/servicenow-devops-register-package@main
-              with:
-                  # ServiceNow Devops Integration User Name
-                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-                  # ServiceNow Devops Integration User Password
-                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-                  # ServiceNow Instance URL
-                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
-                  # Orchestration Tool Id of the tool created in ServiceNow
-                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-                  # Github Context
-                  context-github: ${{ toJSON(github) }}
-                  # List of Artifacts in JSON format
-                  artifacts: '[
-                      {
-                          "name": "app-devops.jar2",
-                          "version": "1.${{ github.run_number }}",
-                          "semanticVersion": "1.${{ github.run_number }}.0",
-                          "repositoryName": "${{ github.repository }}"
-                      }
-                  ]'
-                  # Name of the Package that contains list of artifacts
-                  package-name: 'app-devops-change-velocity.war'
-                  # Display Name of Job
-                  job-name: 'Integration Tests'
+          - name: Register Artifact
+            uses: ServiceNow/servicenow-devops-register-artifact@main
+            with:
+              devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+              devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+              instance-url: ${{ secrets.SN_INSTANCE_URL }}
+              tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+              context-github: ${{ toJSON(github) }}
+              job-name: 'Integration Tests'
+              artifacts: ' [{"name": "com:autoclaim","version": "1.${{ github.run_number }}","semanticVersion": "1.${{ github.run_number }}.0","repositoryName": "${{ github.repository }}"}]'
+
+          - name: Register Package
+            uses: ServiceNow/servicenow-devops-register-package@main
+            with:
+              devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+              devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+              instance-url: ${{ secrets.SN_INSTANCE_URL }}
+              tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+              context-github: ${{ toJSON(github) }}
+              job-name: 'Integration Tests'
+              artifacts: ' [{"name": "com:autoclaim","version": "1.${{ github.run_number }}","semanticVersion": "1.${{ github.run_number }}.0","repositoryName": "${{ github.repository }}"}]'
+              package-name: 'autoclaim.war'
     deploy:
         name: Deploy
         needs: integrationTest

@@ -85,11 +85,11 @@ jobs:
 #                   xml-report-filename: target/surefire-reports/testng-results.xml
 #                   # GitHub Custom Action
 #                   test-type: # optional, default is JUnit
-    integrationTest:
-        name: Integration Tests
-        needs: test
-        runs-on: ubuntu-latest
-        steps:  
+#     integrationTest:
+#         name: Integration Tests
+#         needs: test
+#         runs-on: ubuntu-latest
+#         steps:  
 
 #           - name: ServiceNow Register Artifact
 #             uses: ServiceNow/servicenow-devops-register-artifact@v1.34.2

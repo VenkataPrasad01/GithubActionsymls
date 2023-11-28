@@ -53,38 +53,38 @@ jobs:
             #         SONAR_URL: ${{ secrets.SONAR_URL }}
             #         SONAR_ORG_KEY: ${{ secrets.SONAR_ORG_KEY }}
             
-            # - name: ServiceNow DevOps Sonar Scan Results
-            #   uses: ServiceNow/servicenow-devops-sonar@main
-            #   with:
-            #       devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-            #       devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-            #       instance-url: ${{ secrets.SN_INSTANCE_URL }}
-            #       tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-            #       job-name: 'test'
-            #       context-github: ${{ toJSON(github) }}
-            #       sonar-host-url: ${{ secrets.SONAR_URL }}
-            #       sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
+            - name: ServiceNow DevOps Sonar Scan Results
+              uses: ServiceNow/servicenow-devops-sonar@dev
+              with:
+                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                  job-name: 'test'
+                  context-github: ${{ toJSON(github) }}
+                  sonar-host-url: ${{ secrets.SONAR_URL }}
+                  sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
       
-#             - name: ServiceNow DevOps Unit Test Results
-#             # You may pin to the exact commit or the version.
-#               uses: ServiceNow/servicenow-devops-test-report@main
-#               with:
-#                   # Devops Integration User Name
-#                   devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-#                   # Devops Integration User Password
-#                   devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-#                   # ServiceNow Instance Name
-#                   instance-url: ${{ secrets.SN_INSTANCE_URL }}
-#                   # Orchestration Tool Id
-#                   tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-#                   # Job Name
-#                   job-name: 'Test'
-#                   # Github Context
-#                   context-github: ${{ toJSON(github) }}
-#                   # JUnit xml report file name with path
-#                   xml-report-filename: target/surefire-reports/testng-results.xml
-#                   # GitHub Custom Action
-#                   test-type: # optional, default is JUnit
+            - name: ServiceNow DevOps Unit Test Results
+            # You may pin to the exact commit or the version.
+              uses: ServiceNow/servicenow-devops-test-report@dev
+              with:
+                  # Devops Integration User Name
+                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                  # Devops Integration User Password
+                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                  # ServiceNow Instance Name
+                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                  # Orchestration Tool Id
+                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                  # Job Name
+                  job-name: 'Test'
+                  # Github Context
+                  context-github: ${{ toJSON(github) }}
+                  # JUnit xml report file name with path
+                  xml-report-filename: target/surefire-reports/testng-results.xml
+                  # GitHub Custom Action
+                  test-type: # optional, default is JUnit
     integrationTest:
         name: Integration Tests
         needs: test
@@ -92,7 +92,7 @@ jobs:
         steps:  
 
           - name: ServiceNow Register Artifact
-            uses: ServiceNow/servicenow-devops-register-artifact@v1.34.2
+            uses: ServiceNow/servicenow-devops-register-artifact@dev
             with:
                       devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
                       devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
@@ -103,7 +103,7 @@ jobs:
                       artifacts: '[{"name": "com:customactiondemo","version": "1.${{ github.run_number }}","semanticVersion": "1.${{ github.run_number }}.0","repositoryName": "${{ github.repository }}"}]'
 
           - name: Register Package
-            uses: ServiceNow/servicenow-devops-register-package@v1.34.2
+            uses: ServiceNow/servicenow-devops-register-package@dev
             with:
               devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
               devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}

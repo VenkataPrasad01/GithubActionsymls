@@ -174,10 +174,10 @@ jobs:
                 change-details: '{"build_number":"","pipeline_name":"","stage_name":"Deploy"}'
 
             - name: Output of GET change
-                run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT
+              run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT
          
             - name: Checkout
-                uses: actions/checkout@v3
+              uses: actions/checkout@v3
         
             - name: Custom Action UPDATE
               uses:  ServiceNow/servicenow-devops-update-change@dev   

@@ -120,7 +120,7 @@ jobs:
         steps:     
             - name: ServiceNow DevOps Change Automation
             # You may pin to the exact commit or the version.
-              uses: ServiceNow/servicenow-devops-change@main
+              uses: ServiceNow/servicenow-devops-change@dev
               with:
                   # ServiceNow Instance URL
                   instance-url: ${{ secrets.SN_INSTANCE_URL }}
@@ -137,9 +137,9 @@ jobs:
                   # Github Context
                   context-github: ${{ toJSON(github) }}
                   # The max. time in seconds to wait until the action should fail.
-                  timeout: # optional, default is 3600
+                  timeout: 3600
                   # The time in seconds to wait between trying the API.
-                  interval: # optional, default is 100
+                  interval: 5
                   # The customized inputs to create change with the requested details.
                   change-request: '{
                       "setCloseCode": "true",

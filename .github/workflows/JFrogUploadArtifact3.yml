@@ -8,7 +8,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: "/home/runner/work/GithubActionsymls/BulkCommitDir/"
+        working-directory: "/home/runner/work/GithubActionsymls/"
 
     steps:
       - name: Checkout code

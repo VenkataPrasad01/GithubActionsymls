@@ -25,7 +25,7 @@ jobs:
     
       - name: Run JFrog CLI Ping
         run: |
-          export JFROG_CLI_HOME="/home/runner/work/GithubActionsymls/BulkCommitDir/"
+          export JFROG_CLI_HOME="tf-trial/workspaces/jfrog-ws1/"
           jf rt ping 
           jf --version
           jf rt u "README.md" "local_repo"

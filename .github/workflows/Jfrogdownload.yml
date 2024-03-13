@@ -44,5 +44,6 @@ jobs:
    # This action publishes the build information to Artifactory and deletes older builds
    - name: Download Artifact
      run: |
-       wget -O "test.txt" "https://venkata14.jfrog.io/artifactory/tf-trial/workspaces/jfrog-ws1/"
-       unzip "test.txt" -d "BulkCommitDir"
+       wget -O test.txt https://venkata14.jfrog.io/artifactory/tf-trial/workspaces/jfrog-ws1/test.txt
+       mkdir -p ${{ github.workspace }}/txt-files/
+       mv test.txt ${{ github.workspace }}/txt-files/

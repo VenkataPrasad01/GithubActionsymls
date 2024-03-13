@@ -28,15 +28,15 @@ jobs:
 
 
    # This action creates a new test file and uploads it to Artifactory   
-   - name: Push Build to Artifactory
-     run: |
-       echo "test file " > test.txt
-       export BUILD_NAME="my-build"
-       export BUILD_MODULE="my-module"
-       export BUILD_NUMBER="1"
+   # - name: Push Build to Artifactory
+   #   run: |
+   #     echo "test file " > test.txt
+   #     export BUILD_NAME="my-build"
+   #     export BUILD_MODULE="my-module"
+   #     export BUILD_NUMBER="1"
 
 
-       export PATH_TO_DIRECTORY="tf-trial/workspaces/jfrog-ws1/"
+   #     export PATH_TO_DIRECTORY="tf-trial/workspaces/jfrog-ws1/"
       
      #  jf rt upload "test.txt" $PATH_TO_DIRECTORY --build-name $BUILD_NAME --build-number $BUILD_NUMBER --module $BUILD_MODULE
 

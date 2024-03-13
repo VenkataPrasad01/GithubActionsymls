@@ -45,4 +45,4 @@ jobs:
    - name: Download Artifact
      run: |
        wget -O "test.txt" "https://venkata14.jfrog.io/artifactory/tf-trial/workspaces/jfrog-ws1/"
-       unzip "test.txt" -d 
+       unzip "test.txt" -d "BulkCommitDir"

@@ -19,7 +19,7 @@ jobs:
         with:
           version: latest
         env:
-          JF_URL: "https://venkata12.jfrog.io"
+          JF_URL: "https://venkata14.jfrog.io"
           JF_USER: "admin"
           JF_PASSWORD: "Testing1!"
     

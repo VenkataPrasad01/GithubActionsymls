@@ -47,3 +47,14 @@ jobs:
        jf rt build-publish $BUILD_NAME $BUILD_NUMBER
      
        jf rt bdi c --max-builds=1
+   - name: Download Artifact
+     run: |
+        - jf rt dl tf-trial/workspaces/jfrog-ws1/test.txt --build-name $BUILD_NAME --build-number $BUILD_NUMBER --module $BUILD_MODULE
+        - jf rt build-publish $BUILD_NAME $BUILD_NUMBER
+
+
+   - name: Display structure of downloaded files of Artifact 
+     run: ls -R
+     working-directory: ${{ github.workspace }}
+
+  

@@ -35,6 +35,12 @@ jobs:
           jf rt bce
           # Publish build info
           jf rt bp
+
+          jf rt u "BulkCommitDir/randfile_1_2022_05_14_08_54_1652498687.txt" "tf-trial/workspaces/jfrog-ws1/"
+          # Collect environment variables for the build
+          jf rt bce
+          # Publish build info
+          jf rt bp
    # - name: Download Artifact
    #   run: |
    #        jf rt dl tf-trial/workspaces/jfrog-ws1/README.md ./ 

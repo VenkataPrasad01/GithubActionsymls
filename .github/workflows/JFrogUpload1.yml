@@ -30,7 +30,7 @@ jobs:
    - name: Run JFrog CLI Ping
      run: |
           export JFROG_CLI_HOME="/home/runner/work/jenkins-test/jenkins-test"
-          jf rt u "Jenkinsfile1" "tf-trial/workspaces/jfrog-ws1/"
+          jf rt u "Jenkinsfile" "tf-trial/workspaces/jfrog-ws1/"
           # Collect environment variables for the build
           jf rt bce
           # Publish build info
@@ -80,7 +80,7 @@ jobs:
 
  deploy:
         name: Deploy
-        needs: test
+        needs: build
         runs-on: ubuntu-latest
         steps:     
             - name: ServiceNow DevOps Change Automation

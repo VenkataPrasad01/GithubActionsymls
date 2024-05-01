@@ -44,7 +44,7 @@ jobs:
           fi
  deploy:
         name: Deploy
-        needs: integrationTest
+        needs: post_api_call_perf
         runs-on: ubuntu-latest
         steps:     
             - name: ServiceNow DevOps Change Automation

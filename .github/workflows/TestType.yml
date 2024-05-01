@@ -42,4 +42,96 @@ jobs:
           exit 1
 
           fi
-    
+ deploy:
+        name: Deploy
+        needs: integrationTest
+        runs-on: ubuntu-latest
+        steps:     
+            - name: ServiceNow DevOps Change Automation
+            # You may pin to the exact commit or the version.
+              uses: ServiceNow/servicenow-devops-change@dev
+              with:
+                  # ServiceNow Instance URL
+                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                  # # Devops Integration User Name
+                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                  # # Devops Integration User Password
+                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                  # Devops Integration User Name
+                  # devops-integration-token: ${{ secrets.SN_INSTANCE_TOKEN }}
+                  # Orchestration Tool Id
+                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                  # Display Name of the Job
+                  job-name: 'Deploy'
+                  # Github Context
+                  context-github: ${{ toJSON(github) }}
+                  # The max. time in seconds to wait until the action should fail.
+                  timeout: 3600
+                  # The time in seconds to wait between trying the API.
+                  interval: 5
+                  # The customized inputs to create change with the requested details.
+                  change-request: '{
+                      "setCloseCode": "true",
+                      "attributes": {
+                          "short_description": "Automated Software Deployment",
+                          "description": "Automated Software Deployment.",
+                          "assignment_group": "a715cd759f2002002920bde8132e7018",
+                          "implementation_plan": "Software update is tested and results can be found in Test Summaries Tab.",
+                          "backout_plan": "When software fails in production, the previous software release will be re-deployed.",
+                          "test_plan": "Testing if the software was successfully deployed"
+                      }
+                  }'
+            - name: ServiceNow DevOps Get Change
+              # You may pin to the exact commit or the version.
+              # uses: ServiceNow/servicenow-devops-get-change@0f8b1914adeaec764a4286bdd9cba73ed1c6097f
+              uses: ServiceNow/servicenow-devops-get-change@dev
+              id: get
+              with:
+                # ServiceNow Instance URL
+                instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                # Devops Integration User Name
+                # devops-integration-user-name: # optional
+                # # Devops Integration User Password
+                # devops-integration-user-password: # optional
+                # Devops Integration Token
+                devops-integration-token: ${{ secrets.SN_INSTANCE_TOKEN }} # optional
+                # Orchestration Tool Id
+                tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                # Github Context
+                context-github: ${{ toJSON(github) }}
+                # The inputs to identify change at Servicenow and GET it.
+                change-details: '{"build_number":"","pipeline_name":"","stage_name":"Deploy"}'
+
+            - name: Output of GET change
+              run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT     
+
+            - name: attach test summary to change
+                 run: |
+
+                   apiUrl="https://venkata7.service-now.com//api/now/attachment/file?table_name=change_request&table_sys_id=${{ steps.get.outputs.change-request-number }}&file_name=test10111.xml"
+
+                   requestBody='<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"Title="MainWindow" Height="350" Width="525"><Grid Name="MainGrid"><StackPanel Name="StackPanel1"><Button Name="Button1">First Button</Button><Button Name="Button2">Second Button</Button></StackPanel></Grid></Window>'
+
+                   auth="ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
+
+                   authHeader="Basic $auth"
+
+                   response=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader" -d "$requestBody" $apiUrl)
+
+                   exitCode=$?
+
+                  if [ $exitCode -eq 0 ]; then
+
+                  echo "API call successful!"
+
+                  echo "Response: $response"
+
+                  else
+
+                  echo "API call failed!"
+
+                  echo "Response: $response"
+
+                  exit 1
+
+                  fi

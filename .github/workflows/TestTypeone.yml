@@ -43,10 +43,10 @@ jobs:
 
  #          fi
  deploy:
-        name: Deploy
-        needs: post_api_call_perf
-        runs-on: ubuntu-latest
-        steps:     
+       name: Deploy
+        #needs: post_api_call_perf
+       runs-on: ubuntu-latest
+       steps:     
             # - name: ServiceNow DevOps Change Automation
             # # You may pin to the exact commit or the version.
             #   uses: ServiceNow/servicenow-devops-change@dev

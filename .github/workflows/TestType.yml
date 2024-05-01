@@ -16,9 +16,25 @@ jobs:
       run: |
 
           apiUrl="https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=7bae922dc375c250c95605bdc001314c&testType=Smoke"
-
-          requestBody='{"toolId": "7bae922dc375c250c95605bdc001314c" , "workflow": "Test API Call Perf", "repository": "VenkataPrasad01/GithubActionsymls", "stageName":"post_api_call_perf","pipelineName":"Test API Call Perf", "testType": "Functional", "buildNumber": '${{ github.run_number }}', "buildId": '${{ github.run_id }}' , "attemptNumber" : '${{ github.run_attempt }}', "name": "GitHub Test Summary - SMoke","duration": 0.0,"maximumVirtualUsers": 10,"throughput": "5/min","maximumTime": 1000,"minimumTime": 5000,"averageTime": 7000,"startTime": "2023-12-14T23:31:31z","finishTime": "2023-12-14T23:31:31z","ninetyPercent": 8000, "standardDeviation": 2.0, passedTests: 1,
-                        failedTests: 1,skippedTests: 1, blockedTests: 0,totalTests: 3 }'
+          
+          requestBody='{"toolId": "7bae922dc375c250c95605bdc001314c" ,
+          "workflow": "Test API Call Perf",
+          "repository": "VenkataPrasad01/GithubActionsymls", 
+          "stageName":"post_api_call_perf",
+          "pipelineName":"VenkataPrasad01/GithubActionsymls/Test API Call Perf",
+          "testType": "Functional",
+          "buildNumber": '${{ github.run_number }}',
+          "buildId": '${{ github.run_id }}' ,
+          "attemptNumber" : '${{ github.run_attempt }}',
+          "name": "Smoke Test",
+           "duration": 0.0,
+           "passedTests": 1,
+           "failedTests": 1,
+           "skippedTests": 1,
+           "blockedTests": 1,
+           "totalTests": 4,
+           "startTime": "2023-12-14T23:31:31z",
+	          "finishTime": "2023-12-15T23:31:31z"}'
 
           auth="ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
 

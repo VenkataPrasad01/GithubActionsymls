@@ -106,7 +106,7 @@ jobs:
               run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT     
 
             - name: attach test summary to change
-                 run: |
+              run: |
 
                    apiUrl="https://venkata7.service-now.com//api/now/attachment/file?table_name=change_request&table_sys_id=${{ steps.get.outputs.change-request-number }}&file_name=test10111.xml"
 

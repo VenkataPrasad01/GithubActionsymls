@@ -107,8 +107,12 @@ jobs:
 
             - name: attach test summary to change
               run: |
+                  apiUrl1="https://venkata7.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=VenkataPrasad01/GithubActionsymls/Test API Call Perf&toolId=7bae922dc375c250c95605bdc001314c&buildNumber=${{github.run_number}}/attempts/1&stageName=Deploy"
 
-                  apiUrl="https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=${{ steps.get.outputs.change-request-number }}&file_name=test101h.xml"
+                  authHeader1="Basic ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
+                  response1=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader1"  $apiUrl1)
+                  
+                  apiUrl="https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=$response1.result.sys_id&file_name=test101h.xml"
 
                   requestBody='<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"Title="MainWindow" Height="350" Width="525"><Grid Name="MainGrid"><StackPanel Name="StackPanel1"><Button Name="Button1">First Button</Button><Button Name="Button2">Second Button</Button></StackPanel></Grid></Window>'
 

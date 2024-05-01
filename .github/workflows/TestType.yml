@@ -107,7 +107,7 @@ jobs:
 
             - name: attach test summary to change
               run: |
-                  apiUrl1="https://venkata7.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=VenkataPrasad01/GithubActionsymls/Test API Call Perf&toolId=7bae922dc375c250c95605bdc001314c&buildNumber=${{github.run_number}}/attempts/1&stageName=Deploy"
+                  apiUrl1="https://venkata7.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=VenkataPrasad01/GithubActionsymls/Test API Call Perf&toolId=7bae922dc375c250c95605bdc001314c&buildNumber=${{github.run_id}}/attempts/1&stageName=Deploy"
 
                   authHeader1="Basic ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
                   response1=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader1"  $apiUrl1)

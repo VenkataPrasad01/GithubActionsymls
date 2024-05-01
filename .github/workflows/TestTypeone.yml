@@ -5,109 +5,109 @@ on: workflow_dispatch
 
 
 jobs:
- post_api_call_perf:
-   runs-on: ubuntu-latest
+ # post_api_call_perf:
+ #   runs-on: ubuntu-latest
   
-   steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-    - name: post_api_call_perf
+ #   steps:
+ #    - name: Checkout Repository
+ #      uses: actions/checkout@v2
+ #    - name: post_api_call_perf
 
-      run: |
+ #      run: |
 
-          apiUrl="https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=7bae922dc375c250c95605bdc001314c&testType=Smoke"
+ #          apiUrl="https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=7bae922dc375c250c95605bdc001314c&testType=Smoke"
           
-          requestBody='{"toolId": "7bae922dc375c250c95605bdc001314c", "buildNumber": '${{ github.run_number }}' , "workflow": "Test API Call", "repository": "VenkataPrasad01/GithubActionsymls", "stageName":"post_api_call","pipelineName":"TestType1", "testType": "Smoke", "buildNumber": '${{ github.run_number }}', "buildId": '${{ github.run_id }}' , "attemptNumber" : '${{ github.run_attempt }}', "testSummaries": [{"name": "GitHub Test Summary - smoke","passedTests": 1,"failedTests": 1,"skippedTests": 1,"ignoredTests": 0,"blockedTests": 1,"totalTests": 4,"startTime": "2023-12-14T23:31:31z","endTime": "2023-12-14T23:31:31z","duration": 0.0,"testType": "Smoke", "suites": []}] }'
+ #          requestBody='{"toolId": "7bae922dc375c250c95605bdc001314c", "buildNumber": '${{ github.run_number }}' , "workflow": "Test API Call", "repository": "VenkataPrasad01/GithubActionsymls", "stageName":"post_api_call","pipelineName":"TestType1", "testType": "Smoke", "buildNumber": '${{ github.run_number }}', "buildId": '${{ github.run_id }}' , "attemptNumber" : '${{ github.run_attempt }}', "testSummaries": [{"name": "GitHub Test Summary - smoke","passedTests": 1,"failedTests": 1,"skippedTests": 1,"ignoredTests": 0,"blockedTests": 1,"totalTests": 4,"startTime": "2023-12-14T23:31:31z","endTime": "2023-12-14T23:31:31z","duration": 0.0,"testType": "Smoke", "suites": []}] }'
 
-          auth="ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
+ #          auth="ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
 
-          authHeader="Basic $auth"
+ #          authHeader="Basic $auth"
 
-          response=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader" -d "$requestBody" $apiUrl)
+ #          response=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader" -d "$requestBody" $apiUrl)
 
-          exitCode=$?
+ #          exitCode=$?
 
-          if [ $exitCode -eq 0 ]; then
+ #          if [ $exitCode -eq 0 ]; then
 
-          echo "API call successful!"
+ #          echo "API call successful!"
 
-          echo "Response: $response"
+ #          echo "Response: $response"
 
-          else
+ #          else
 
-          echo "API call failed!"
+ #          echo "API call failed!"
 
-          echo "Response: $response"
+ #          echo "Response: $response"
 
-          exit 1
+ #          exit 1
 
-          fi
+ #          fi
  deploy:
         name: Deploy
         needs: post_api_call_perf
         runs-on: ubuntu-latest
         steps:     
-            - name: ServiceNow DevOps Change Automation
-            # You may pin to the exact commit or the version.
-              uses: ServiceNow/servicenow-devops-change@dev
-              with:
-                  # ServiceNow Instance URL
-                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
-                  # # Devops Integration User Name
-                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-                  # # Devops Integration User Password
-                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-                  # Devops Integration User Name
-                  # devops-integration-token: ${{ secrets.SN_INSTANCE_TOKEN }}
-                  # Orchestration Tool Id
-                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-                  # Display Name of the Job
-                  job-name: 'Deploy'
-                  # Github Context
-                  context-github: ${{ toJSON(github) }}
-                  # The max. time in seconds to wait until the action should fail.
-                  timeout: 3600
-                  # The time in seconds to wait between trying the API.
-                  interval: 5
-                  # The customized inputs to create change with the requested details.
-                  change-request: '{
-                      "setCloseCode": "true",
-                      "attributes": {
-                          "short_description": "Automated Software Deployment",
-                          "description": "Automated Software Deployment.",
-                          "assignment_group": "a715cd759f2002002920bde8132e7018",
-                          "implementation_plan": "Software update is tested and results can be found in Test Summaries Tab.",
-                          "backout_plan": "When software fails in production, the previous software release will be re-deployed.",
-                          "test_plan": "Testing if the software was successfully deployed"
-                      }
-                  }'
-            - name: ServiceNow DevOps Get Change
-              # You may pin to the exact commit or the version.
-              # uses: ServiceNow/servicenow-devops-get-change@0f8b1914adeaec764a4286bdd9cba73ed1c6097f
-              uses: ServiceNow/servicenow-devops-get-change@dev
-              id: get
-              with:
-                # ServiceNow Instance URL
-                instance-url: ${{ secrets.SN_INSTANCE_URL }}
-                # Devops Integration User Name
-                # devops-integration-user-name: # optional
-                # # Devops Integration User Password
-                # devops-integration-user-password: # optional
-                # Devops Integration Token
-                devops-integration-token: ${{ secrets.SN_INSTANCE_TOKEN }} # optional
-                # Orchestration Tool Id
-                tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-                # Github Context
-                context-github: ${{ toJSON(github) }}
-                # The inputs to identify change at Servicenow and GET it.
-                change-details: '{"build_number":"","pipeline_name":"","stage_name":"Deploy"}'
+            # - name: ServiceNow DevOps Change Automation
+            # # You may pin to the exact commit or the version.
+            #   uses: ServiceNow/servicenow-devops-change@dev
+            #   with:
+            #       # ServiceNow Instance URL
+            #       instance-url: ${{ secrets.SN_INSTANCE_URL }}
+            #       # # Devops Integration User Name
+            #       devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+            #       # # Devops Integration User Password
+            #       devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+            #       # Devops Integration User Name
+            #       # devops-integration-token: ${{ secrets.SN_INSTANCE_TOKEN }}
+            #       # Orchestration Tool Id
+            #       tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+            #       # Display Name of the Job
+            #       job-name: 'Deploy'
+            #       # Github Context
+            #       context-github: ${{ toJSON(github) }}
+            #       # The max. time in seconds to wait until the action should fail.
+            #       timeout: 3600
+            #       # The time in seconds to wait between trying the API.
+            #       interval: 5
+            #       # The customized inputs to create change with the requested details.
+            #       change-request: '{
+            #           "setCloseCode": "true",
+            #           "attributes": {
+            #               "short_description": "Automated Software Deployment",
+            #               "description": "Automated Software Deployment.",
+            #               "assignment_group": "a715cd759f2002002920bde8132e7018",
+            #               "implementation_plan": "Software update is tested and results can be found in Test Summaries Tab.",
+            #               "backout_plan": "When software fails in production, the previous software release will be re-deployed.",
+            #               "test_plan": "Testing if the software was successfully deployed"
+            #           }
+            #       }'
+            # - name: ServiceNow DevOps Get Change
+            #   # You may pin to the exact commit or the version.
+            #   # uses: ServiceNow/servicenow-devops-get-change@0f8b1914adeaec764a4286bdd9cba73ed1c6097f
+            #   uses: ServiceNow/servicenow-devops-get-change@dev
+            #   id: get
+            #   with:
+            #     # ServiceNow Instance URL
+            #     instance-url: ${{ secrets.SN_INSTANCE_URL }}
+            #     # Devops Integration User Name
+            #     # devops-integration-user-name: # optional
+            #     # # Devops Integration User Password
+            #     # devops-integration-user-password: # optional
+            #     # Devops Integration Token
+            #     devops-integration-token: ${{ secrets.SN_INSTANCE_TOKEN }} # optional
+            #     # Orchestration Tool Id
+            #     tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+            #     # Github Context
+            #     context-github: ${{ toJSON(github) }}
+            #     # The inputs to identify change at Servicenow and GET it.
+            #     change-details: '{"build_number":"","pipeline_name":"","stage_name":"Deploy"}'
 
-            - name: Output of GET change
-              run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT     
+            # - name: Output of GET change
+            #   run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT     
 
             - name: attach test summary to change
               run: |
-                  apiUrl1="https://venkata7.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=VenkataPrasad01/GithubActionsymls/TestType1&toolId=7bae922dc375c250c95605bdc001314c&buildNumber=${{github.run_id}}/attempts/1&stageName=Deploy"
+                  apiUrl1="https://venkata7.service-now.com/api/sn_devops/devops/orchestration/changeInfo?pipelineName=VenkataPrasad01/GithubActionsymls/TestType1&toolId=7bae922dc375c250c95605bdc001314c&buildNumber=8909132514&stageName=Deploy"
 
                   authHeader1="Basic ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
                   response1=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader1"  $apiUrl1)

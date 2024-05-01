@@ -17,7 +17,7 @@ jobs:
 
           apiUrl="https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=7bae922dc375c250c95605bdc001314c&testType=Load"
 
-          requestBody='{"toolId": "7bae922dc375c250c95605bdc001314c", "buildNumber": '${{ github.run_number }}' , "workflow": "Test API Call Perf", "repository": "VenkataPrasad01/GithubActionsymls", "stageName":"post_api_call_perf","pipelineName":"Test API Call Perf", "testType": "Load", "buildNumber": '${{ github.run_number }}', "buildId": '${{ github.run_id }}' , "attemptNumber" : '${{ github.run_attempt }}', "name": "GitHub Test Summary - Performance 2.0","duration": 0.0,"maximumVirtualUsers": 10,"throughput": "5/min","maximumTime": 1000,"minimumTime": 5000,"averageTime": 7000,"startTime": "2023-12-14T23:31:31z","finishTime": "2023-12-14T23:31:31z","ninetyPercent": 8000, "standardDeviation": 2.0 }'
+          requestBody='{"toolId": "7bae922dc375c250c95605bdc001314c", "buildNumber": '${{ github.run_number }}' , "workflow": "Test API Call Perf", "repository": "VenkataPrasad01/GithubActionsymls", "stageName":"post_api_call_perf","pipelineName":"Test API Call Perf", "testType": "Load", "buildNumber": '${{ github.run_number }}', "buildId": '${{ github.run_id }}' , "attemptNumber" : '${{ github.run_attempt }}', "name": "GitHub Test Summary - Performance 3.0","duration": 0.0,"maximumVirtualUsers": 10,"throughput": "5/min","maximumTime": 1000,"minimumTime": 5000,"averageTime": 7000,"startTime": "2023-12-14T23:31:31z","finishTime": "2023-12-14T23:31:31z","ninetyPercent": 8000, "standardDeviation": 2.0 }'
 
           auth="ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
 
@@ -112,7 +112,7 @@ jobs:
 
                   requestBody='<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"Title="MainWindow" Height="350" Width="525"><Grid Name="MainGrid"><StackPanel Name="StackPanel1"><Button Name="Button1">First Button</Button><Button Name="Button2">Second Button</Button></StackPanel></Grid></Window>'
 
-                  auth="ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
+                  auth="YWJlbC50dXRlcjpUZXN0aW5nMSE="
 
                   authHeader="Basic $auth"
 

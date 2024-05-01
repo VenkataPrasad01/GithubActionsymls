@@ -108,17 +108,17 @@ jobs:
             - name: attach test summary to change
               run: |
 
-                   apiUrl="https://venkata7.service-now.com//api/now/attachment/file?table_name=change_request&table_sys_id=${{ steps.get.outputs.change-request-number }}&file_name=test10111.xml"
+                  apiUrl="https://venkata7.service-now.com//api/now/attachment/file?table_name=change_request&table_sys_id=${{ steps.get.outputs.change-request-number }}&file_name=test10111.xml"
 
-                   requestBody='<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"Title="MainWindow" Height="350" Width="525"><Grid Name="MainGrid"><StackPanel Name="StackPanel1"><Button Name="Button1">First Button</Button><Button Name="Button2">Second Button</Button></StackPanel></Grid></Window>'
+                  requestBody='<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"Title="MainWindow" Height="350" Width="525"><Grid Name="MainGrid"><StackPanel Name="StackPanel1"><Button Name="Button1">First Button</Button><Button Name="Button2">Second Button</Button></StackPanel></Grid></Window>'
 
-                   auth="ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
+                  auth="ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
 
-                   authHeader="Basic $auth"
+                  authHeader="Basic $auth"
 
-                   response=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader" -d "$requestBody" $apiUrl)
+                  response=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader" -d "$requestBody" $apiUrl)
 
-                   exitCode=$?
+                  exitCode=$?
 
                   if [ $exitCode -eq 0 ]; then
 

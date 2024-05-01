@@ -112,7 +112,7 @@ jobs:
                   authHeader1="Basic ZGV2b3BzLmludGVncmF0aW9uLnVzZXI6VGVzdGluZzEh"
                   response1=$(curl -X POST -H "Content-Type: application/json" -H "Authorization: $authHeader1"  $apiUrl1)
                   
-                  apiUrl="https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=$response1.result.sys_id&file_name=test101h.xml"
+                  apiUrl="https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=51ffcd5347b546501d917242846d4308&file_name=test101h.xml"
 
                   requestBody='<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"Title="MainWindow" Height="350" Width="525"><Grid Name="MainGrid"><StackPanel Name="StackPanel1"><Button Name="Button1">First Button</Button><Button Name="Button2">Second Button</Button></StackPanel></Grid></Window>'
 

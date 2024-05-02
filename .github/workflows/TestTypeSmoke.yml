@@ -40,7 +40,7 @@ jobs:
         uses: ServiceNow/servicenow-devops-change@dev
         with:
           # Devops Integration Token
-          devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+          devops-integration-token: ${{ secrets.SN_INSTANCE_TOKEN }}
           # ServiceNow Instance URL
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
           # Orchestration Tool Id

@@ -17,7 +17,7 @@ jobs:
 
           apiUrl="https://venkata7.service-now.com/api/sn_devops/v1/devops/tool/test?toolId=7bae922dc375c250c95605bdc001314c&testType=Smoke"
           
-          requestBody='{"toolId": "7bae922dc375c250c95605bdc001314c", "buildNumber": '${{ github.run_number }}' , "workflow": "Test API Call Perf", "repository": "VenkataPrasad01/GithubActionsymls", "stageName":"post_api_call","pipelineName":"TestType", "testType": "Smoke", "buildNumber": '${{ github.run_number }}', "buildId": '${{ github.run_id }}' , "attemptNumber" : '${{ github.run_attempt }}', "testSummaries": [{"name": "GitHub Test Summary - smoke","passedTests": 1,"failedTests": 1,"skippedTests": 1,"ignoredTests": 0,"blockedTests": 1,"totalTests": 4,"startTime": "2023-12-14T23:31:31z","endTime": "2023-12-14T23:31:31z","duration": 0.0,"testType": "Smoke", "suites": []}] }'
+          requestBody='{"toolId": "7bae922dc375c250c95605bdc001314c", "buildNumber": '${{ github.run_number }}' , "workflow": "Test API Call Perf", "repository": "VenkataPrasad01/GithubActionsymls", "stageName":"post_api_call_perf","pipelineName":"TestType", "testType": "Smoke", "buildNumber": '${{ github.run_number }}', "buildId": '${{ github.run_id }}' , "attemptNumber" : '${{ github.run_attempt }}', "testSummaries": [{"name": "GitHub Test Summary - smoke","passedTests": 1,"failedTests": 1,"skippedTests": 1,"ignoredTests": 0,"blockedTests": 1,"totalTests": 4,"startTime": "2023-12-14T23:31:31z","endTime": "2023-12-14T23:31:31z","duration": 0.0,"testType": "Smoke", "suites": []}] }'
 
           auth="ZGV2b3BzLnN5c3RlbTpUZXN0aW5nMSE="
 

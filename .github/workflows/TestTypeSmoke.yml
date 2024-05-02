@@ -65,7 +65,7 @@ jobs:
             -H "Authorization: Basic YWJlbC50dXRlcjpUZXN0aW5nMSE=" \
             -H "Content-Type: application/xml" \
             -d '<root><name>john2</name><age>34</age></root>' \
-            "https://empkiranv01.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=${{ steps.create_change.outputs.change-request-sys-id }}&file_name=test113.xml"
+            "https://venkata7.service-now.com/api/now/attachment/file?table_name=change_request&table_sys_id=${{ steps.create_change.outputs.change-request-sys-id }}&file_name=test113.xml"
           
           
          

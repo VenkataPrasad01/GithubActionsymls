@@ -192,8 +192,9 @@ jobs:
               id: update
               with:
                 change-request-number: ${{steps.get.outputs.change-request-number}}# Active CR
-                devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-                devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                # devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                # devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                devops-integration-token: ${{ secrets.SN_INSTANCE_TOKEN }} # optional
                 instance-url: ${{ secrets.SN_INSTANCE_URL }}
                 context-github: ${{ toJSON(github) }}
                 change-request-details: '{ "work_notes":"Updated work_notes abcdefghijklmnopqrstuvwxyz","short_description":"Updated short_description abcdefghijklmnopqrstuvwxyz","description":"Updated description abcdefghijklmnopqrstuvwxyz", "close_code":"successful", "close_notes":"Updated close_notes abcdefghijklmnopqrstuvwxyz"}' #Working Version
